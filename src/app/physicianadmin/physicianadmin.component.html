@@ -1,0 +1,40 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+      {{pageTitle}}
+  </div>
+
+  <!-- Filter the Products   -->
+  <div class="panel-body">
+
+<div class="table-responsive">
+        <table class="table"
+               *ngIf="withoutAddr && withoutAddr.length">
+            <thead>
+                <tr>
+                    <th>
+                        Select
+                    </th>
+                    <th>NPI</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Address</th>
+                    <th>State</th>
+                    <th>Zip Code</th>
+                    <th>Associate Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let wa of withoutAddr; let i = index">
+                        <td><input (change)="RemoveAddr(wa.npi,i)" type="checkbox" [disabled]="!wa.isUpdated" [(ngModel)]="wa.isUpdated" /></td>
+                        <td>{{wa.npi}}</td>
+                        <td>{{wa.firstName}}</td>
+                        <td>{{wa.lastName}}</td>
+                        <td>{{wa.address}}</td>
+                        <td>{{wa.state}}</td>
+                        <td>{{wa.zipcode}}</td>
+                        <td><button class="btn btn-primary" [disabled]="wa.address" (click) = "updateAddr(wa.npi, i)">Edit</button></td>
+                </tr>
+            </tbody>
+        </table>
+</div>
+  </div>
